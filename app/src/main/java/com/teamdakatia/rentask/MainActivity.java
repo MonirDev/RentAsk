@@ -90,7 +90,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Toast.makeText(this, "Home CLicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this,Create_add.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
             Toast.makeText(this, "Gallery CLicked", Toast.LENGTH_SHORT).show();
         }
