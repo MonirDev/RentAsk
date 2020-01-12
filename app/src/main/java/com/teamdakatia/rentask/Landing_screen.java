@@ -21,7 +21,7 @@ public class Landing_screen extends AppCompatActivity {
     }
 
     public void rent(View view) {
-        Intent intent = new Intent(Landing_screen.this,SignIn.class);
+        Intent intent = new Intent(Landing_screen.this,MainActivity.class);
         startActivity(intent);
     }
 }
