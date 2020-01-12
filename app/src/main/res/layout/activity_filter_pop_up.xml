@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    tools:context=".Filter_pop_up"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+    <EditText
+        android:id="@+id/pop_areaName"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/dropdown_style"
+        android:hint="Enter Area Name"
+        android:gravity="center"
+        android:textSize="16sp"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <AutoCompleteTextView
+            android:id="@+id/pop_homeType"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:hint="Home Type"
+            android:textSize="16sp"
+            android:background="@drawable/dropdown_style"
+            android:paddingLeft="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/pop_homeType"
+            app:layout_constraintEnd_toEndOf="@+id/pop_homeType"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="@+id/pop_homeType"
+            app:layout_constraintTop_toTopOf="@+id/pop_homeType"
+            app:srcCompat="@drawable/dropdown"
+            tools:ignore="VectorDrawableCompat" />
+
+        <AutoCompleteTextView
+            android:id="@+id/pop_price"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="Price Range"
+            android:textSize="16sp"
+            android:background="@drawable/dropdown_style"
+            android:paddingLeft="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/pop_homeType"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/pop_price"
+            app:layout_constraintEnd_toEndOf="@+id/pop_price"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="@+id/pop_price"
+            app:layout_constraintTop_toTopOf="@+id/pop_price"
+            app:srcCompat="@drawable/dropdown"
+            tools:ignore="VectorDrawableCompat" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_style1"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="Search"
+        android:textAllCaps="false"
+        android:textColor="@color/btnTextColor"
+        android:textSize="18sp" />
+
+</LinearLayout>

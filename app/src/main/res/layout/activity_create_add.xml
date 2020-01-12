@@ -13,8 +13,10 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -37,45 +39,98 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="110dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
-                app:layout_constraintBottom_toTopOf="@+id/addpictures"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stepText1" />
-
-            <Button
-                android:id="@+id/addpictures"
-                android:layout_width="180dp"
-                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/button_style1"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="Add Pictures"
-                android:textAllCaps="false"
-                android:textColor="@color/btnTextColor"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/stepText1"
+                android:src="@drawable/camera"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"/>
+
+            <TextView
+                android:id="@+id/add1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="Select Image"
+                android:textColor="@color/btnTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView14"
+                app:layout_constraintEnd_toEndOf="@+id/imageView14"
+                app:layout_constraintStart_toStartOf="@+id/imageView14"
+                app:layout_constraintTop_toTopOf="@+id/imageView14"
+                app:layout_constraintVertical_bias="0.94" />
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="110dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/divider"
+                app:layout_constraintStart_toEndOf="@+id/imageView14"
+                app:layout_constraintTop_toBottomOf="@+id/stepText1"
+                app:layout_constraintVertical_bias="0.0"
+                android:src="@drawable/camera"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true" />
+
+            <TextView
+                android:id="@+id/add2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="Select Image"
+                android:textColor="@color/btnTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView15"
+                app:layout_constraintEnd_toEndOf="@+id/imageView15"
+                app:layout_constraintStart_toStartOf="@+id/imageView15"
+                app:layout_constraintTop_toTopOf="@+id/imageView15"
+                app:layout_constraintVertical_bias="0.94" />
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="110dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView15"
+                app:layout_constraintTop_toBottomOf="@+id/stepText1"
+                android:src="@drawable/camera"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true" />
+
+            <TextView
+                android:id="@+id/add3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="Select Image"
+                android:textColor="@color/btnTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+                app:layout_constraintEnd_toEndOf="@+id/imageView16"
+                app:layout_constraintStart_toStartOf="@+id/imageView16"
+                app:layout_constraintTop_toTopOf="@+id/imageView16"
+                app:layout_constraintVertical_bias="0.94" />
 
             <View
                 android:id="@+id/divider"
                 android:layout_width="300dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="10dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addpictures" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
             <AutoCompleteTextView
                 android:id="@+id/homeType"
@@ -202,7 +257,7 @@
                 android:text="Next"
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -399,7 +454,7 @@
                 android:text="Previous"
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnNext2"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -420,7 +475,7 @@
                 android:text="Next"
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pickLocation" />
@@ -509,18 +564,18 @@
                 app:srcCompat="@drawable/dropdown"
                 tools:ignore="VectorDrawableCompat" />
 
-            <Button
+            <TextView
                 android:id="@+id/facility"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/button_style1"
-                android:fontFamily="@font/noto_sans_bold"
                 android:padding="10dp"
+                android:gravity="center"
                 android:text="Check Available Facility"
                 android:textAllCaps="false"
                 android:textColor="@color/textColorWhite"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rentStart" />
@@ -624,7 +679,7 @@
                 android:text="Previous"
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnPublish"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -644,7 +699,7 @@
                 android:text="Publish"
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkField" />
