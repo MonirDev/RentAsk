@@ -24,4 +24,9 @@ public class Landing_screen extends AppCompatActivity {
         Intent intent = new Intent(Landing_screen.this,MainActivity.class);
         startActivity(intent);
     }
+
+    public void search(View view) {
+        Intent intent = new Intent(Landing_screen.this,MapActivity.class);
+        startActivity(intent);
+    }
 }
