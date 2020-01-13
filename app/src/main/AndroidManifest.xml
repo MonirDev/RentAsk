@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".OwnerDashboard"></activity>
         <activity android:name=".Create_add" />
         <activity
             android:name=".Splash_screen"
@@ -28,7 +29,8 @@
         <activity
             android:name=".SignIn"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SignUp"
+        <activity
+            android:name=".SignUp"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
