@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "770199852296",
+    "firebase_url": "https://rentask-6ed7e.firebaseio.com",
+    "project_id": "rentask-6ed7e",
+    "storage_bucket": "rentask-6ed7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770199852296:android:b802d18a6c895b676cc8bd",
+        "android_client_info": {
+          "package_name": "com.teamdakatia.rentask"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770199852296-9tgfff8tujl3mgmvgjes0vs5m2de8kjk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teamdakatia.rentask",
+            "certificate_hash": "4271ce05dddd779c949e75d191add765f17ec0fd"
+          }
+        },
+        {
+          "client_id": "770199852296-sg15vbn0a69f9uavdssihjjabn0bgec8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCamclkNH96mNN8-EMIH15h6gk-KJc4smc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770199852296-sg15vbn0a69f9uavdssihjjabn0bgec8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

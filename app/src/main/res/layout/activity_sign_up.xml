@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bac"
+    android:orientation="vertical"
+    tools:context=".SignUp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RentAsk"
+        android:fontFamily="@font/noto_sans_bold"
+        android:textSize="30dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#04E091"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:layout_gravity="center"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:layout_marginTop="50dp"/>
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:hint="Full Name"
+            android:background="@drawable/button_shape"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp"/>
+
+        <EditText
+            android:id="@+id/phone_number"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:hint="Phone Number"
+            android:background="@drawable/button_shape"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:hint="Password"
+            android:background="@drawable/button_shape"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:inputType="textPassword"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp"/>
+
+        <EditText
+            android:id="@+id/confirm_password"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:hint="Confirm Password"
+            android:background="@drawable/button_shape"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:inputType="textPassword"
+            android:paddingLeft="15dp"/>
+
+
+        <Button
+            android:id="@+id/sign_up"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_shape2"
+            android:layout_marginTop="30dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:onClick="Sign_up" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already a member?"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:textColor="#fff"/>
+
+        <TextView
+            android:id="@+id/sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:textSize="15sp"
+            android:textColor="#4792A9"/>
+
+    </LinearLayout>
+
+</LinearLayout>
