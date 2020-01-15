@@ -3,7 +3,7 @@
     package="com.teamdakatia.rentask">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:allowBackup="true"
@@ -20,6 +20,7 @@
         <activity android:name=".Create_add" />
         <activity android:name=".AddListDetails" />
         <activity android:name=".AddListview" />
+        <activity android:name=".OwnerDashboard" />
         <activity
             android:name=".Splash_screen"
             android:theme="@style/AppTheme.NoActionBar">

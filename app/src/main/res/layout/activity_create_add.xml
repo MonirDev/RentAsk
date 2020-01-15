@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Create_add">
+    tools:context=".Create_add"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <ScrollView
         android:id="@+id/step1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:visibility="visible">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/stepText1"
@@ -33,201 +26,139 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/noto_sans_bold"
                 android:text="Step 1"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/btnTextColor"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="24sp" />
+
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_below="@id/stepText1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/noto_sans_bold"
                 android:text="Select Image"
                 android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/img1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stepText1" />
+                android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/img1"
-                android:layout_width="80dp"
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/photo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_below="@id/textView4">
 
-            <ImageView
-                android:id="@+id/img2"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/photo"
-                app:layout_constraintBottom_toTopOf="@+id/divider"
-                app:layout_constraintStart_toEndOf="@+id/img1"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
-                app:layout_constraintVertical_bias="0.0" />
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/photo" />
 
-            <ImageView
-                android:id="@+id/img3"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/photo"
-                app:layout_constraintBottom_toBottomOf="@+id/img2"
-                app:layout_constraintStart_toEndOf="@+id/img2"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
-                app:layout_constraintVertical_bias="0.0" />
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/photo" />
+
+                <ImageView
+                    android:id="@+id/img3"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/photo" />
+
+            </LinearLayout>
+
 
             <View
                 android:id="@+id/divider"
                 android:layout_width="330dp"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:layout_marginTop="10dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.495"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img1" />
+                android:background="#000"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/linearLayout" />
 
-            <AutoCompleteTextView
-                android:id="@+id/homeType"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
+            <RelativeLayout
+                android:id="@+id/rel1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/dropdown_style"
-                android:hint="Home Type"
-                android:paddingLeft="50dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/divider">
+                <AutoCompleteTextView
+                    android:id="@+id/homeType"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/dropdown_style"
+                    android:drawableRight="@drawable/dropdown"
+                    android:hint="Home Type"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="20dp"
+                    android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/homeType"
-                app:layout_constraintEnd_toEndOf="@+id/homeType"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toStartOf="@+id/homeType"
-                app:layout_constraintTop_toTopOf="@+id/homeType"
-                app:srcCompat="@drawable/dropdown"
-                tools:ignore="VectorDrawableCompat" />
-
-            <AutoCompleteTextView
-                android:id="@+id/price"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/dropdown_style"
-                android:hint="Price BDT."
-                android:paddingLeft="50dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeType" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_marginBottom="13dp"
-                app:layout_constraintBottom_toBottomOf="@+id/price"
-                app:layout_constraintEnd_toEndOf="@+id/price"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toStartOf="@+id/price"
-                app:layout_constraintTop_toTopOf="@+id/price"
-                app:srcCompat="@drawable/dropdown"
-                tools:ignore="VectorDrawableCompat" />
-
-            <AutoCompleteTextView
-                android:id="@+id/numberRoom"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/dropdown_style"
-                android:hint="Number Of Room"
-                android:paddingLeft="50dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/price" />
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/numberRoom"
-                app:layout_constraintEnd_toEndOf="@+id/numberRoom"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toStartOf="@+id/numberRoom"
-                app:layout_constraintTop_toTopOf="@+id/numberRoom"
-                app:srcCompat="@drawable/dropdown"
-                tools:ignore="VectorDrawableCompat" />
+                <AutoCompleteTextView
+                    android:id="@+id/price"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/homeType"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/dropdown_style"
+                    android:drawableRight="@drawable/dropdown"
+                    android:hint="Price BDT"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="20dp"
+                    android:textSize="18sp" />
 
 
-            <AutoCompleteTextView
-                android:id="@+id/numberBath"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/dropdown_style"
-                android:hint="Number Of Bath"
-                android:paddingLeft="50dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/numberRoom" />
+                <AutoCompleteTextView
+                    android:id="@+id/numberRoom"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/price"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/dropdown_style"
+                    android:drawableRight="@drawable/dropdown"
+                    android:hint="Number of Room"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="20dp"
+                    android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/numberBath"
-                app:layout_constraintEnd_toEndOf="@+id/numberBath"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toStartOf="@+id/numberBath"
-                app:layout_constraintTop_toTopOf="@+id/numberBath"
-                app:srcCompat="@drawable/dropdown"
-                tools:ignore="VectorDrawableCompat" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/numberBath"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/numberRoom"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/dropdown_style"
+                    android:drawableRight="@drawable/dropdown"
+                    android:hint="Number of Bath"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="20dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/btnNext1"
                 android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/button_style1"
                 android:fontFamily="@font/noto_sans_bold"
                 android:onClick="goNextStep2"
@@ -235,196 +166,108 @@
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/numberBath"
-                app:layout_constraintVertical_bias="1.0" />
+               android:layout_below="@id/rel1"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
     </ScrollView>
 
     <ScrollView
         android:id="@+id/step2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:visibility="gone">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/stepText2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
                 android:fontFamily="@font/noto_sans_bold"
                 android:text="Step 2"
                 android:textColor="@color/btnTextColor"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <AutoCompleteTextView
-                android:id="@+id/division"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/dropdown_style"
-                android:hint="Select Division"
-                android:paddingLeft="50dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stepText2" />
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="wrap_content"
+                android:textSize="24sp" />
+            <RelativeLayout
+                android:id="@+id/rel2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_marginBottom="13dp"
-                app:layout_constraintBottom_toBottomOf="@+id/division"
-                app:layout_constraintEnd_toEndOf="@+id/division"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toStartOf="@+id/division"
-                app:layout_constraintTop_toTopOf="@+id/division"
-                app:srcCompat="@drawable/dropdown"
-                tools:ignore="VectorDrawableCompat" />
-
-            <AutoCompleteTextView
-                android:id="@+id/district"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/dropdown_style"
-                android:hint="Select District"
-                android:paddingLeft="50dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/division" />
-
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_marginBottom="13dp"
-                app:layout_constraintBottom_toBottomOf="@+id/district"
-                app:layout_constraintEnd_toEndOf="@+id/district"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toStartOf="@+id/district"
-                app:layout_constraintTop_toTopOf="@+id/district"
-                app:srcCompat="@drawable/dropdown"
-                tools:ignore="VectorDrawableCompat" />
-
-            <AutoCompleteTextView
-                android:id="@+id/areaName"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/dropdown_style"
-                android:hint="Select Area Name"
-                android:paddingLeft="50dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/district" />
-
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_marginBottom="13dp"
-                app:layout_constraintBottom_toBottomOf="@+id/areaName"
-                app:layout_constraintEnd_toEndOf="@+id/areaName"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toStartOf="@+id/areaName"
-                app:layout_constraintTop_toTopOf="@+id/areaName"
-                app:srcCompat="@drawable/dropdown"
-                tools:ignore="VectorDrawableCompat" />
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_below="@id/stepText2">
+                <AutoCompleteTextView
+                    android:id="@+id/division"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/dropdown_style"
+                    android:drawableRight="@drawable/dropdown"
+                    android:hint="Select Division"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="20dp"
+                    android:textSize="18sp" />
+                <AutoCompleteTextView
+                    android:id="@+id/district"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/division"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/dropdown_style"
+                    android:drawableRight="@drawable/dropdown"
+                    android:hint="Select District"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="20dp"
+                    android:textSize="18sp" />
+                <AutoCompleteTextView
+                    android:id="@+id/areaName"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/district"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/dropdown_style"
+                    android:drawableRight="@drawable/dropdown"
+                    android:hint="Select Area Name"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="20dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
 
             <EditText
                 android:id="@+id/shortAddress"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/dropdown_style"
                 android:hint="Short Address: 74/4/A, Green Road, Farmgate, Dhaka"
                 android:inputType="text"
                 android:padding="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/areaName" />
+                android:layout_below="@id/rel2"/>
 
             <Button
                 android:id="@+id/pickLocation"
                 android:layout_width="280dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/dropdown_style"
-                android:text="Pick My Location"
+                android:text="Pick Home Location"
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shortAddress" />
-
-            <ImageView
-                android:id="@+id/imageView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_marginBottom="13dp"
-                app:layout_constraintBottom_toBottomOf="@+id/pickLocation"
-                app:layout_constraintEnd_toEndOf="@+id/pickLocation"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toStartOf="@+id/pickLocation"
-                app:layout_constraintTop_toTopOf="@+id/pickLocation"
-                app:srcCompat="@drawable/pick_location"
-                tools:ignore="VectorDrawableCompat" />
+                android:layout_below="@id/shortAddress"
+                android:drawableRight="@drawable/pick_location"
+                android:paddingRight="20dp"/>
 
             <Button
                 android:id="@+id/btnPrev1"
                 android:layout_width="120dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="40dp"
                 android:background="@drawable/button_style1"
                 android:fontFamily="@font/noto_sans_bold"
                 android:onClick="goPrevStep1"
@@ -432,20 +275,16 @@
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnNext2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pickLocation" />
+                android:layout_below="@id/pickLocation"/>
 
             <Button
                 android:id="@+id/btnNext2"
                 android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/button_style1"
                 android:fontFamily="@font/noto_sans_bold"
                 android:onClick="goNextStep3"
@@ -453,109 +292,80 @@
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pickLocation" />
+                android:layout_below="@id/pickLocation"/>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
     </ScrollView>
 
     <ScrollView
         android:id="@+id/step3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:visibility="gone">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/stepText3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
                 android:fontFamily="@font/noto_sans_bold"
                 android:text="Step 3"
                 android:textColor="@color/btnTextColor"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/phoneNumber"
+                android:id="@+id/post_phoneNumber"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/dropdown_style"
-                android:gravity="center"
                 android:hint="Example: 01753419326"
                 android:inputType="number"
                 android:padding="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stepText3" />
+                android:paddingLeft="20dp"
+                android:layout_below="@id/stepText3"/>
 
-            <AutoCompleteTextView
-                android:id="@+id/rentStart"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/dropdown_style"
-                android:hint="Rent Start From"
-                android:paddingLeft="50dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
-
-            <ImageView
-                android:id="@+id/imageView12"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/rel3"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_marginBottom="13dp"
-                app:layout_constraintBottom_toBottomOf="@+id/rentStart"
-                app:layout_constraintEnd_toEndOf="@+id/rentStart"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toStartOf="@+id/rentStart"
-                app:layout_constraintTop_toTopOf="@+id/rentStart"
-                app:srcCompat="@drawable/dropdown"
-                tools:ignore="VectorDrawableCompat" />
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_below="@id/post_phoneNumber">
+                <AutoCompleteTextView
+                    android:id="@+id/rentStart"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/dropdown_style"
+                    android:drawableRight="@drawable/dropdown"
+                    android:hint="Rent Start From"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="20dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/facility"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/button_style1"
-                android:padding="10dp"
                 android:gravity="center"
+                android:padding="10dp"
                 android:text="Check Available Facility"
                 android:textAllCaps="false"
                 android:textColor="@color/textColorWhite"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rentStart" />
+                android:layout_below="@id/rel3"/>
 
             <LinearLayout
                 android:id="@+id/checkField"
@@ -564,9 +374,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/facility">
+                android:layout_below="@id/facility">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -646,7 +454,6 @@
                 android:id="@+id/btnPrev2"
                 android:layout_width="120dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="10dp"
@@ -657,30 +464,24 @@
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnPublish"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkField" />
+                android:layout_below="@id/checkField"/>
 
             <Button
                 android:id="@+id/btnPublish"
                 android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/button_style1"
                 android:fontFamily="@font/noto_sans_bold"
                 android:text="Publish"
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkField" />
+                android:layout_below="@id/checkField"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

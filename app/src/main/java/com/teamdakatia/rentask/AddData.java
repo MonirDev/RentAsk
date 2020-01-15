@@ -15,14 +15,10 @@ public class AddData {
         this.password = password;
     }
 
-    public AddData(String name, String phone_number, String password, String imgUrl1,
-                   String imgUrl2, String imgUrl3, String home_type, String price,
+    public AddData(String imgUrl1, String imgUrl2, String imgUrl3, String home_type, String price,
                    String nRooms, String nBath, String division, String district,
                    String area_name, String short_address, String pick_lat, String pick_long,
                    String post_phone_number, String rent_start, String check_value) {
-        this.name = name;
-        this.phone_number = phone_number;
-        this.password = password;
         this.imgUrl1 = imgUrl1;
         this.imgUrl2 = imgUrl2;
         this.imgUrl3 = imgUrl3;

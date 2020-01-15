@@ -42,9 +42,8 @@
             android:hint="Full Name"
             android:background="@drawable/button_shape"
             android:layout_marginTop="20dp"
-            android:gravity="center"
             android:layout_gravity="center"
-            android:paddingLeft="15dp"/>
+            android:paddingLeft="20dp"/>
 
         <EditText
             android:id="@+id/phone_number"
@@ -53,10 +52,9 @@
             android:hint="Phone Number"
             android:background="@drawable/button_shape"
             android:layout_marginTop="10dp"
-            android:gravity="center"
             android:inputType="number"
             android:layout_gravity="center"
-            android:paddingLeft="15dp"/>
+            android:paddingLeft="20dp"/>
 
         <EditText
             android:id="@+id/password"
@@ -65,10 +63,9 @@
             android:hint="Password"
             android:background="@drawable/button_shape"
             android:layout_marginTop="10dp"
-            android:gravity="center"
             android:inputType="textPassword"
             android:layout_gravity="center"
-            android:paddingLeft="15dp"/>
+            android:paddingLeft="20dp"/>
 
         <EditText
             android:id="@+id/confirm_password"
@@ -78,9 +75,8 @@
             android:hint="Confirm Password"
             android:background="@drawable/button_shape"
             android:layout_marginTop="10dp"
-            android:gravity="center"
             android:inputType="textPassword"
-            android:paddingLeft="15dp"/>
+            android:paddingLeft="20dp"/>
 
 
         <Button

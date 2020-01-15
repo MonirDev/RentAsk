@@ -3,12 +3,14 @@ package com.teamdakatia.rentask;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class SignIn extends AppCompatActivity {
     private EditText signIn_number,signIn_password;
     private DatabaseReference databaseReference;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +50,7 @@ public class SignIn extends AppCompatActivity {
       sign_in.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-               String oPhoneNumber = signIn_number.getText().toString().trim();
+               final String oPhoneNumber = signIn_number.getText().toString().trim();
                final String oPassword = signIn_password.getText().toString().trim();
               databaseReference.orderByChild("phone_number").equalTo(oPhoneNumber).addListenerForSingleValueEvent(new ValueEventListener() {
                   @Override
@@ -57,7 +60,8 @@ public class SignIn extends AppCompatActivity {
                               AddData mPass = ds.getValue(AddData.class);
                               String mPassword = mPass.getPassword().toString();
                               if (oPassword.equals(mPassword)) {
-                                  Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                  Intent intent = new Intent(getApplicationContext(), OwnerDashboard.class);
+                                  intent.putExtra("UniqueId", oPhoneNumber);
                                   startActivity(intent);
                               } else {
                                   signIn_password.setError("Password or Number Don't Match!!");
@@ -65,7 +69,7 @@ public class SignIn extends AppCompatActivity {
                           }
                       }else {
                           signIn_number.setError("Input Number Correctly");
-                          Toast.makeText(SignIn.this, "You didn't create any account using this number!!", Toast.LENGTH_LONG).show();
+                          Toast.makeText(SignIn.this, "You didn't create any account using this number!!", Toast.LENGTH_SHORT).show();
                       }
                   }
 
@@ -84,22 +88,3 @@ public class SignIn extends AppCompatActivity {
         });
 }
 }
-/* String id = getIntent().getExtras().getString("uniqueId");
-              String oPassword = password.getText().toString();
-              if (!TextUtils.isEmpty(oPassword)){
-                  AddData SetDataReg = new AddData(oPassword);
-                  databaseReference.child(id).child(DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime())).setValue(SetDataReg).addOnCompleteListener(new OnCompleteListener<Void>() {
-                      @Override
-                      public void onComplete(@NonNull Task<Void> task) {
-                          if (task.isSuccessful()){
-                              Toast.makeText(SignIn.this,"Successfully Added",Toast.LENGTH_SHORT).show();
-                          }
-                      }
-                  }).addOnFailureListener(new OnFailureListener() {
-                      @Override
-                      public void onFailure(@NonNull Exception e) {
-
-                      }
-                  });
-
-              }*/
