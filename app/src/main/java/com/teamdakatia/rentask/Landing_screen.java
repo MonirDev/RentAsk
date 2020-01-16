@@ -21,14 +21,14 @@ public class Landing_screen extends AppCompatActivity {
     }
 
     public void rent(View view) {
-        Intent intent = new Intent(Landing_screen.this,SignIn.class);
+        Intent intent = new Intent(Landing_screen.this, SignIn.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_in_right);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
 
     }
 
     public void search(View view) {
-        Intent intent = new Intent(Landing_screen.this,MapActivity.class);
+        Intent intent = new Intent(Landing_screen.this, MapActivity.class);
         startActivity(intent);
     }
 }

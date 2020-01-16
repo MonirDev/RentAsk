@@ -15,7 +15,7 @@
         android:background="@color/colorPrimary"
         android:layout_height="wrap_content"
         android:queryHint="Search your Area..."
-        android:iconifiedByDefault="false"
+        android:iconifiedByDefault="true"
         android:searchIcon="@drawable/ic_search_black_24dp"
         />
 

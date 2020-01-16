@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -58,8 +60,8 @@ public class Create_add extends AppCompatActivity {
     private Button btnPublish,pick_location;
     private ScrollView step1, step2,step3;
     private ImageView img1,img2,img3;
-    private AutoCompleteTextView home_type,price,number_room,number_bath,division,district,areaName,rent_start;
-    private EditText short_address,post_phoneNumber;
+    private AutoCompleteTextView home_type,number_room,number_bath,division,district,areaName,rent_start;
+    private EditText price,short_address,post_phoneNumber;
     private CheckBox checkLift, checkWifi, checkParking, checkCctv, checkGas, checkFire;
 
     private String img_url1="",img_url2="",img_url3="", lati, lon;
@@ -118,7 +120,6 @@ public class Create_add extends AppCompatActivity {
         checkList.add(" ");
 
         final String idExit = getIntent().getExtras().getString("uniqueId");
-        step1.setVisibility(View.VISIBLE);
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -127,6 +128,7 @@ public class Create_add extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
+        dropDown();
         imageSelection();
         checkboxItem();
 
@@ -191,6 +193,53 @@ public class Create_add extends AppCompatActivity {
         });
 
 
+    }
+
+    private void dropDown() {
+        home_type.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                        Create_add.this,R.array.home_type_array,android.R.layout.simple_dropdown_item_1line
+                );
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                home_type.setAdapter(adapter);
+                home_type.showDropDown();
+            }
+        });
+        number_room.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                        Create_add.this,R.array.numberRoom_array,android.R.layout.simple_dropdown_item_1line
+                );
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                number_room.setAdapter(adapter);
+                number_room.showDropDown();
+            }
+        });
+        number_bath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                        Create_add.this,R.array.numberBath_array,android.R.layout.simple_dropdown_item_1line
+                );
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                number_bath.setAdapter(adapter);
+                number_bath.showDropDown();
+            }
+        });
+        division.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                        Create_add.this,R.array.division_array,android.R.layout.simple_dropdown_item_1line
+                );
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                division.setAdapter(adapter);
+                division.showDropDown();
+            }
+        });
     }
 
     private void checkboxItem() {
@@ -401,9 +450,10 @@ public class Create_add extends AppCompatActivity {
                             step1.setVisibility(View.GONE);
                             step2.setVisibility(View.VISIBLE);
                             step3.setVisibility(View.GONE);
-                            StorageReference ref1 = storageReference.child("images/" + "monir/" + "1");
-                            StorageReference ref2 = storageReference.child("images/" + "monir/" + "2");
-                            StorageReference ref3 = storageReference.child("images/" + "monir/" + "3");
+                            final String idExit = getIntent().getExtras().getString("uniqueId");
+                            StorageReference ref1 = storageReference.child("images/" + idExit + "1");
+                            StorageReference ref2 = storageReference.child("images/" + idExit + "2");
+                            StorageReference ref3 = storageReference.child("images/" + idExit + "3");
                             ref1.putFile(file_path1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

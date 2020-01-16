@@ -107,20 +107,20 @@
                     android:hint="Home Type"
                     android:paddingLeft="50dp"
                     android:paddingRight="20dp"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:focusable="false"/>
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/price"
                     android:layout_width="280dp"
                     android:layout_height="50dp"
                     android:layout_below="@id/homeType"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/dropdown_style"
-                    android:drawableRight="@drawable/dropdown"
                     android:hint="Price BDT"
                     android:paddingLeft="50dp"
                     android:paddingRight="20dp"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
 
 
                 <AutoCompleteTextView
@@ -134,7 +134,8 @@
                     android:hint="Number of Room"
                     android:paddingLeft="50dp"
                     android:paddingRight="20dp"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:focusable="false" />
 
 
                 <AutoCompleteTextView
@@ -148,7 +149,8 @@
                     android:hint="Number of Bath"
                     android:paddingLeft="50dp"
                     android:paddingRight="20dp"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:focusable="false" />
             </RelativeLayout>
 
             <Button
@@ -208,7 +210,8 @@
                     android:hint="Select Division"
                     android:paddingLeft="50dp"
                     android:paddingRight="20dp"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:focusable="false" />
                 <AutoCompleteTextView
                     android:id="@+id/district"
                     android:layout_width="280dp"
