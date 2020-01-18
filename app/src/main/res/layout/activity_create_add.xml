@@ -118,6 +118,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/dropdown_style"
                     android:hint="Price BDT"
+                    android:inputType="number"
                     android:paddingLeft="50dp"
                     android:paddingRight="20dp"
                     android:textSize="18sp"/>
@@ -200,18 +201,19 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:layout_below="@id/stepText2">
-                <AutoCompleteTextView
-                    android:id="@+id/division"
-                    android:layout_width="280dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/dropdown_style"
-                    android:drawableRight="@drawable/dropdown"
-                    android:hint="Select Division"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="20dp"
-                    android:textSize="18sp"
-                    android:focusable="false" />
+                    <AutoCompleteTextView
+                        android:id="@+id/division"
+                        android:layout_width="280dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/dropdown_style"
+                        android:drawableRight="@drawable/dropdown"
+                        android:hint="Select Division"
+                        android:paddingLeft="40dp"
+                        android:paddingRight="20dp"
+                        android:textSize="18sp"
+                        android:focusable="false"/>
+
                 <AutoCompleteTextView
                     android:id="@+id/district"
                     android:layout_width="280dp"
@@ -219,11 +221,9 @@
                     android:layout_below="@id/division"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/dropdown_style"
-                    android:drawableRight="@drawable/dropdown"
-                    android:hint="Select District"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="20dp"
-                    android:textSize="18sp" />
+                    android:hint="Enter District Name"
+                    android:paddingLeft="40dp"
+                    android:textSize="18sp"/>
                 <AutoCompleteTextView
                     android:id="@+id/areaName"
                     android:layout_width="280dp"
@@ -231,23 +231,22 @@
                     android:layout_below="@id/district"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/dropdown_style"
-                    android:drawableRight="@drawable/dropdown"
-                    android:hint="Select Area Name"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="20dp"
+                    android:hint="Enter Area Name"
+                    android:paddingLeft="40dp"
                     android:textSize="18sp" />
             </RelativeLayout>
 
             <EditText
                 android:id="@+id/shortAddress"
                 android:layout_width="280dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/dropdown_style"
-                android:hint="Short Address: 74/4/A, Green Road, Farmgate, Dhaka"
+                android:hint="Short Address: Green Road, Farmgate, Dhaka"
+                android:textSize="14sp"
                 android:inputType="text"
-                android:padding="15dp"
+                android:paddingLeft="10dp"
                 android:layout_below="@id/rel2"/>
 
             <Button

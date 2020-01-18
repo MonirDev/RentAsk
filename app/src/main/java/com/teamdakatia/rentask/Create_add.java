@@ -23,6 +23,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -73,6 +74,7 @@ public class Create_add extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageReference;
     DatabaseReference databaseReference;
+
     private static  final int REQUEST_LOCATION=1;
     private LocationManager locationManager;
 
@@ -84,8 +86,6 @@ public class Create_add extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_add);
-
-
 
         step1 = findViewById(R.id.step1);
         step2 = findViewById(R.id.step2);
@@ -131,7 +131,6 @@ public class Create_add extends AppCompatActivity {
         dropDown();
         imageSelection();
         checkboxItem();
-
         pick_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -240,6 +239,21 @@ public class Create_add extends AppCompatActivity {
                 division.showDropDown();
             }
         });
+        rent_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                        Create_add.this,R.array.rent_start,android.R.layout.simple_dropdown_item_1line
+                );
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                rent_start.setAdapter(adapter);
+                rent_start.showDropDown();
+            }
+        });
+        final String district_array[] = {"Dhaka", "Chittagong", "Khulna", "Rajshahi", "Mymensingh", "Barisal", "Rangpur","Sylhet"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, district_array);
+        district.setAdapter(adapter);
     }
 
     private void checkboxItem() {
@@ -338,63 +352,6 @@ public class Create_add extends AppCompatActivity {
         });
     }
 
-    private void fieldFocus() {
-        home_type.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                home_type.setFocusable(true);
-            }
-        });
-        price.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                price.setFocusable(true);
-            }
-        });
-        number_room.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                number_room.setFocusable(true);
-            }
-        });
-        number_bath.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                number_bath.setFocusable(true);
-            }
-        });
-        division.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                division.setFocusable(true);
-            }
-        });
-        district.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                district.setFocusable(true);
-            }
-        });
-        areaName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                areaName.setFocusable(true);
-            }
-        });
-        short_address.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                short_address.setFocusable(true);
-            }
-        });
-        rent_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rent_start.setFocusable(true);
-            }
-        });
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -450,10 +407,13 @@ public class Create_add extends AppCompatActivity {
                             step1.setVisibility(View.GONE);
                             step2.setVisibility(View.VISIBLE);
                             step3.setVisibility(View.GONE);
-                            final String idExit = getIntent().getExtras().getString("uniqueId");
-                            StorageReference ref1 = storageReference.child("images/" + idExit + "1");
-                            StorageReference ref2 = storageReference.child("images/" + idExit + "2");
-                            StorageReference ref3 = storageReference.child("images/" + idExit + "3");
+
+                            String currentDateTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+                            String idExit = getIntent().getExtras().getString("uniqueId");
+                            String imageId = idExit+"/";
+                            StorageReference ref1 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"1");
+                            StorageReference ref2 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"2");
+                            StorageReference ref3 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"3");
                             ref1.putFile(file_path1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

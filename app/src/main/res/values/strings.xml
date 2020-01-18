@@ -40,11 +40,25 @@
     <string-array name="division_array" >
         <item>Dhaka</item>
         <item>Chittagong</item>
-        <item>Rajshahi</item>
         <item>Barisal</item>
         <item>Khulna</item>
+        <item>Rajshahi</item>
+        <item>Mymensingh</item>
         <item>Rangpur</item>
         <item>Sylhet</item>
-        <item>Mymensing</item>
+    </string-array>
+    <string-array name="rent_start" >
+        <item>Januaary</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
 </resources>
