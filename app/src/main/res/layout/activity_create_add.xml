@@ -351,7 +351,8 @@
                     android:hint="Rent Start From"
                     android:paddingLeft="50dp"
                     android:paddingRight="20dp"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:focusable="false"/>
             </RelativeLayout>
 
             <TextView

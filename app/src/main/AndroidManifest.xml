@@ -17,6 +17,11 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".MapActivity" />
+        <activity android:name=".SetNewPassword"/>
+
+        <activity android:name=".OTP_varification"/>
+
+        <activity android:name=".ForgetPassword"/>
         <activity android:name=".Create_add" />
         <activity android:name=".AddListDetails" />
         <activity android:name=".AddListview" />
