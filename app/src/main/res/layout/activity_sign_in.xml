@@ -47,6 +47,7 @@
             android:drawableLeft="@drawable/ic_local_phone_black_24dp"
             android:hint="Phone Number"
             android:drawablePadding="15dp"
+            android:maxLength="11"
             android:inputType="number"
             android:paddingLeft="15dp"/>
 

@@ -4,7 +4,7 @@ public class AddData {
     private String name, phone_number, password, imgUrl1, imgUrl2, imgUrl3,
                    home_type, price,nRooms, nBath, division, district, area_name,
                    short_address, pick_lat, pick_long,post_phone_number,
-                   rent_start, check_value ;
+                   rent_start, check_value, postId,floorN;
     public AddData(){
 
     }
@@ -18,7 +18,7 @@ public class AddData {
     public AddData(String imgUrl1, String imgUrl2, String imgUrl3, String home_type, String price,
                    String nRooms, String nBath, String division, String district,
                    String area_name, String short_address, String pick_lat, String pick_long,
-                   String post_phone_number, String rent_start, String check_value) {
+                   String post_phone_number, String rent_start, String check_value, String postId, String floorN) {
         this.imgUrl1 = imgUrl1;
         this.imgUrl2 = imgUrl2;
         this.imgUrl3 = imgUrl3;
@@ -35,6 +35,8 @@ public class AddData {
         this.post_phone_number = post_phone_number;
         this.rent_start = rent_start;
         this.check_value = check_value;
+        this.postId = postId;
+        this.floorN = floorN;
     }
 
     public String getName() {
@@ -187,5 +189,18 @@ public class AddData {
 
     public void setCheck_value(String check_value) {
         this.check_value = check_value;
+    }
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+    public String getFloorN() {
+        return floorN;
+    }
+    public void setFloorN(String floorN) {
+        this.floorN = floorN;
     }
 }

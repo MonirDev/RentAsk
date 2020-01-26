@@ -16,50 +16,63 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:gravity="center"
             android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="8dp"
-                android:layout_gravity="center"
-                android:background="@drawable/rounded_button"
-                android:src="@drawable/ic_person_black_24dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Signed in as"
+                android:textSize="15sp"
+                android:gravity="center"/>
             <TextView
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Zahid Hossain"
-                android:textSize="20sp"
+                android:text="Name"
+                android:textSize="16sp"
+                android:gravity="center"
                 android:textColor="@color/colorPrimary"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:textStyle="bold|italic"/>
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
     <LinearLayout
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_button"
-        android:orientation="vertical"
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_alignParentRight="true"
         android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Log out"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/colorPrimary"/>
 
         <Button
-            android:id="@+id/logout"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:background="@drawable/logouticon"
+            android:backgroundTint="@color/colorPrimary"
             android:shadowColor="#999"
-            android:layout_gravity="center">
-
-        </Button>
+            android:layout_gravity="center"/>
 
     </LinearLayout>
     </RelativeLayout>
+    <TextView
+        android:id="@+id/noItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="You didn't create any To-Let yet"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@+id/user"
@@ -67,23 +80,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-
-
-
-
-
     <RelativeLayout
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/rounded_button"
         android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp">
 
     <Button
         android:id="@+id/createPost"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:background="@drawable/ic_add_circle_black_24dp"
         android:shadowColor="#999"
         android:layout_gravity="center"/>

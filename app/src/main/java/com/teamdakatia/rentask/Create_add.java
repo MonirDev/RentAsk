@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -61,7 +62,7 @@ public class Create_add extends AppCompatActivity {
     private Button btnPublish,pick_location;
     private ScrollView step1, step2,step3;
     private ImageView img1,img2,img3;
-    private AutoCompleteTextView home_type,number_room,number_bath,division,district,areaName,rent_start;
+    private AutoCompleteTextView home_type,number_room,number_bath,floorN,division,district,areaName,rent_start;
     private EditText price,short_address,post_phoneNumber;
     private CheckBox checkLift, checkWifi, checkParking, checkCctv, checkGas, checkFire;
 
@@ -73,7 +74,7 @@ public class Create_add extends AppCompatActivity {
 
     FirebaseStorage storage;
     StorageReference storageReference;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,databaseReferenceall;
 
     private static  final int REQUEST_LOCATION=1;
     private LocationManager locationManager;
@@ -99,6 +100,7 @@ public class Create_add extends AppCompatActivity {
         number_bath = findViewById(R.id.numberBath);
         division = findViewById(R.id.division);
         district = findViewById(R.id.district);
+        floorN = findViewById(R.id.floorN);
         areaName = findViewById(R.id.areaName);
         short_address = findViewById(R.id.shortAddress);
         pick_location = findViewById(R.id.pickLocation);
@@ -124,6 +126,12 @@ public class Create_add extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference("Post");
+        databaseReferenceall = FirebaseDatabase.getInstance().getReference("allPost");
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         ActivityCompat.requestPermissions(this,new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
@@ -153,20 +161,33 @@ public class Create_add extends AppCompatActivity {
                 String mPrice = price.getText().toString().trim();
                 String mNumberRoom = number_room.getText().toString().trim();
                 String mNumberBath = number_bath.getText().toString().trim();
+                String mFloorN = floorN.getText().toString().trim();
                 String mDivision = division.getText().toString().trim();
                 String mDistrict = district.getText().toString().trim();
                 String mAreaName = areaName.getText().toString().trim();
                 String mShortAddress = short_address.getText().toString();
                 String mPost_phoneNumber = post_phoneNumber.getText().toString().trim();
                 String mRentStart = rent_start.getText().toString().trim();
+                String postId= UUID.randomUUID().toString();
                 checkValue = checkList.get(0)+ checkList.get(1)+ checkList.get(2)+
                         checkList.get(3)+ checkList.get(4)+ checkList.get(5);
                 if (!TextUtils.isEmpty(mPost_phoneNumber) && mPost_phoneNumber.length() == 11){
                     if (!TextUtils.isEmpty(mRentStart)){
                         AddData setData = new AddData(img_url1,img_url2,img_url3,mHome_type,mPrice,
                                 mNumberRoom,mNumberBath,mDivision,mDistrict,mAreaName,mShortAddress,lati,lon,
-                                mPost_phoneNumber,mRentStart,checkValue);
+                                mPost_phoneNumber,mRentStart,checkValue,postId,mFloorN);
                         String currentDateTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+                        databaseReferenceall.child(currentDateTime).setValue(setData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(Create_add.this, "Check Internet Connection!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         databaseReference.child(idExit).child(currentDateTime).setValue(setData).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -190,7 +211,6 @@ public class Create_add extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 
@@ -228,6 +248,17 @@ public class Create_add extends AppCompatActivity {
                 number_bath.showDropDown();
             }
         });
+        floorN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                        Create_add.this,R.array.floorN,android.R.layout.simple_dropdown_item_1line
+                );
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                floorN.setAdapter(adapter);
+                floorN.showDropDown();
+            }
+        });
         division.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -250,10 +281,24 @@ public class Create_add extends AppCompatActivity {
                 rent_start.showDropDown();
             }
         });
-        final String district_array[] = {"Dhaka", "Chittagong", "Khulna", "Rajshahi", "Mymensingh", "Barisal", "Rangpur","Sylhet"};
+        final String district_array[] = {"Barguna","Barisal","Bhola","Jhalokati","Patuakhali","Pirojpur","Bandarban","Brahmanbaria",
+                "Chandpur","Chittagong", "Comilla","Cox's Bazar","Feni","Khagrachhari","Lakshmipur","Noakhali","Rangamati","Dhaka",
+                "Faridpur","Gazipur","Gopalganj","Kishoreganj", "Madaripur","Manikganj","Munshiganj","Narayanganj","Narsingdi",
+                "Rajbari","Shariatpur","Tangail","Bagerhat","Chuadanga","Jessore","Jhenaidah", "Khulna","Kushtia","Magura","Meherpur",
+                "Narail","Satkhira","Jamalpur","Mymensingh","Netrokona","Sherpur","Bogra","Joypurhat","Naogaon", "Natore",
+                "Chapai Nawabganj","Pabna","Rajshahi","Sirajganj","Dinajpur","Gaibandha","Kurigram","Lalmonirhat","Nilphamari","Panchagarh",
+                "Rangpur","Thakurgaon","Habiganj","Moulvibazar","Sunamganj","Sylhet"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, district_array);
         district.setAdapter(adapter);
+        final String area_name[] = {"Mirpur","Uttara","Gulshan","Muhammadpur","Dhanmondi","Bashundhara","Baridhara","Elephant Road",
+                "Jatrabari","Badda","Motijheel","Savar","Rampura","Malibag","Farmgate","Khilgaon","Purbachal","Mogbazar","Banani","Tejgaon",
+                "Banglamoror","Paltan","Rama","Keraniganj","Lalbag","Tongi","Basabo","Cantonment","Khilkhet","Mohakhali","Wari","Sutrapur",
+                "Demra","Bangshal","Chaukbazar","New Market","Kamrangirchar","Hazaribagh","Kafrul","Dhamrai","Kotwali","Nawabganj","Dohar",
+                "Adabor","Airport","Dakshinkhan","Darus salam","Bhasan tek","Bhatara","Gendaria","Kolabagan","Sobujbagh","Shahjahanpur"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, area_name);
+        areaName.setAdapter(adapter1);
     }
 
     private void checkboxItem() {
@@ -261,7 +306,7 @@ public class Create_add extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
-                    checkList.set(0, "Lift");
+                    checkList.set(0, "Lift ");
                 }else {
                     checkList.set(0,"");
                 }
@@ -271,7 +316,7 @@ public class Create_add extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
-                    checkList.set(1,"Wifi");
+                    checkList.set(1,"Wifi ");
                 }else {
                     checkList.set(1,"");
                 }
@@ -281,7 +326,7 @@ public class Create_add extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
-                    checkList.set(2,"Car Parking");
+                    checkList.set(2,"Car Parking ");
                 }else {
                     checkList.set(2,"");
                 }
@@ -291,7 +336,7 @@ public class Create_add extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
-                    checkList.set(3,"CCTV");
+                    checkList.set(3,"CCTV ");
                 }else {
                     checkList.set(3,"");
                 }
@@ -301,7 +346,7 @@ public class Create_add extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
-                    checkList.set(4,"Gas");
+                    checkList.set(4,"Gas ");
                 }else {
                     checkList.set(4,"");
                 }
@@ -391,23 +436,54 @@ public class Create_add extends AppCompatActivity {
     }
 
     public void goNextStep2(View view) {
-        upload();
-    }
-
-    private void upload() {
         if (i1 == true && i2 == true && i3 == true){
             String mHome_type = home_type.getText().toString().trim();
             String mPrice = price.getText().toString().trim();
             String mNumberRoom = number_room.getText().toString().trim();
             String mNumberBath = number_bath.getText().toString().trim();
+            String mFloorN = floorN.getText().toString().trim();
             if (!TextUtils.isEmpty(mHome_type)){
                 if (!TextUtils.isEmpty(mPrice)){
                     if (!TextUtils.isEmpty(mNumberRoom)){
                         if (!TextUtils.isEmpty(mNumberBath)){
-                            step1.setVisibility(View.GONE);
-                            step2.setVisibility(View.VISIBLE);
-                            step3.setVisibility(View.GONE);
+                            if (!TextUtils.isEmpty(mFloorN)){
+                                step1.setVisibility(View.GONE);
+                                step2.setVisibility(View.VISIBLE);
+                                step3.setVisibility(View.GONE);
 
+                            }else {
+                                floorN.setError("Floor No. can't be Empty");
+                            }
+                        }else {
+                            number_bath.setError("Number of Bath can't be Empty");
+                        }
+                    }else {
+                        number_room.setError("Number of Room can't be Empty");
+                    }
+                }else {
+                    price.setError("Price can't be Empty");
+                }
+            }else {
+                home_type.setError("Home Type can't be Empty");
+            }
+        }else {
+            Toast.makeText(this, "You must select three image!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void goNextStep3(View view) {
+        String mDivision = division.getText().toString().trim();
+        String mDistrict = district.getText().toString().trim();
+        String mAreaName = areaName.getText().toString();
+        String mShortAddress = short_address.getText().toString();
+        if (!TextUtils.isEmpty(mDivision)){
+            if (!TextUtils.isEmpty(mDistrict)){
+                if (!TextUtils.isEmpty(mAreaName)){
+                    if (!TextUtils.isEmpty(mShortAddress)){
+                        if (get_location == true){
+                            step1.setVisibility(View.GONE);
+                            step3.setVisibility(View.VISIBLE);
+                            step2.setVisibility(View.GONE);
                             String currentDateTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
                             String idExit = getIntent().getExtras().getString("uniqueId");
                             String imageId = idExit+"/";
@@ -456,36 +532,6 @@ public class Create_add extends AppCompatActivity {
                                     Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                        }else {
-                            number_bath.setError("Number of Bath can't be Empty");
-                        }
-                    }else {
-                        number_room.setError("Number of Room can't be Empty");
-                    }
-                }else {
-                    price.setError("Price can't be Empty");
-                }
-            }else {
-                home_type.setError("Home Type can't be Empty");
-            }
-        }else {
-            Toast.makeText(this, "You must select three image!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void goNextStep3(View view) {
-        String mDivision = division.getText().toString().trim();
-        String mDistrict = district.getText().toString().trim();
-        String mAreaName = areaName.getText().toString().trim();
-        String mShortAddress = short_address.getText().toString();
-        if (!TextUtils.isEmpty(mDivision)){
-            if (!TextUtils.isEmpty(mDistrict)){
-                if (!TextUtils.isEmpty(mAreaName)){
-                    if (!TextUtils.isEmpty(mShortAddress)){
-                        if (get_location == true){
-                            step1.setVisibility(View.GONE);
-                            step3.setVisibility(View.VISIBLE);
-                            step2.setVisibility(View.GONE);
                         }else {
                             pick_location.setError("Pick your home location");
                         }
@@ -583,5 +629,14 @@ public class Create_add extends AppCompatActivity {
         });
         final AlertDialog alertDialog=builder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+        {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

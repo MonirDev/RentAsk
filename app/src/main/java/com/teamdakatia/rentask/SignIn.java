@@ -34,6 +34,7 @@ public class SignIn extends AppCompatActivity {
     Button sign_in;
     private EditText signIn_number, signIn_password;
     private DatabaseReference databaseReference;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -49,14 +50,21 @@ public class SignIn extends AppCompatActivity {
         signIn_number = findViewById(R.id.signIn_number);
         forgetPass = findViewById(R.id.forgetpass);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
                 final String oPhoneNumber = signIn_number.getText().toString().trim();
                 final String oPassword = signIn_password.getText().toString().trim();
                 databaseReference.orderByChild("phone_number").equalTo(oPhoneNumber).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        progressDialog.dismiss();
                         if (dataSnapshot.getValue() != null) {
                             for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                 AddData mPass = ds.getValue(AddData.class);

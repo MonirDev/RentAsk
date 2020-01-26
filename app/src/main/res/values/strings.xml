@@ -15,29 +15,40 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
-    <string-array name="home_type_array" >
+    <string-array name="home_type_array">
         <item>Bachelor</item>
         <item>Family</item>
         <item>Sub-let</item>
     </string-array>
-        <string-array name="numberRoom_array" >
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
-            <item>4</item>
-            <item>5</item>
-            <item>6</item>
-            <item>7</item>
-            <item>8</item>
-            <item>9</item>
-        </string-array>
-            <string-array name="numberBath_array" >
-                <item>1</item>
-                <item>2</item>
-                <item>3</item>
-                <item>4</item>
+    <string-array name="numberRoom_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
     </string-array>
-    <string-array name="division_array" >
+    <string-array name="numberBath_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="floorN">
+        <item>1st</item>
+        <item>2nd</item>
+        <item>3rd</item>
+        <item>4th</item>
+        <item>5th</item>
+        <item>6th</item>
+        <item>7th</item>
+        <item>8th</item>
+        <item>9th</item>
+    </string-array>
+    <string-array name="division_array">
         <item>Dhaka</item>
         <item>Chittagong</item>
         <item>Barisal</item>
@@ -47,7 +58,7 @@
         <item>Rangpur</item>
         <item>Sylhet</item>
     </string-array>
-    <string-array name="rent_start" >
+    <string-array name="rent_start">
         <item>Januaary</item>
         <item>February</item>
         <item>March</item>

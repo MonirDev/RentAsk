@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.teamdakatia.rentask">
+
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AdDetailsCustomer"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity android:name=".MapActivity" />
-        <activity android:name=".SetNewPassword"/>
-
-        <activity android:name=".OTP_varification"/>
-
-        <activity android:name=".ForgetPassword"/>
+        <activity android:name=".SetNewPassword" />
+        <activity android:name=".OTP_varification" />
+        <activity android:name=".ForgetPassword" />
         <activity android:name=".Create_add" />
-        <activity android:name=".AddListDetails" />
-        <activity android:name=".AddListview" />
+        <activity android:name=".AdDetails" />
+        <activity android:name=".AdListview" />
         <activity android:name=".OwnerDashboard" />
         <activity
             android:name=".Splash_screen"
@@ -39,12 +42,10 @@
             android:name=".Landing_screen"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".SignIn"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SignUp"
+        <activity
+            android:name=".SignUp"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

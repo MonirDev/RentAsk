@@ -4,14 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddListview">
+    tools:context=".AdListview">
 
     <ListView
-        android:id="@+id/add_list"
+        android:id="@+id/ad_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
     </ListView>
+    <TextView
+        android:id="@+id/noItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="No To-Let found to this Area"
+        android:visibility="gone"/>
 
     <ProgressBar
         android:id="@+id/listProgressID"

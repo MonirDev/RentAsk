@@ -3,6 +3,7 @@ package com.teamdakatia.rentask;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,8 +30,7 @@ public class SignUp extends AppCompatActivity {
     private EditText name,phone_number,password,confirm_password;
     private DatabaseReference databaseReference;
 
-    private String uniqueId;
-    private Boolean ok;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +43,10 @@ public class SignUp extends AppCompatActivity {
         phone_number = findViewById(R.id.phone_number);
         password = findViewById(R.id.password);
         confirm_password = findViewById(R.id.confirm_password);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading.....");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
 
         sign_in.setOnClickListener(new View.OnClickListener() {
@@ -63,10 +67,12 @@ public class SignUp extends AppCompatActivity {
         if (!TextUtils.isEmpty(oName) && !TextUtils.isEmpty(oPhoneNumber)
                 && oPhoneNumber.length() == 11){
             if (!TextUtils.isEmpty(oPassword) && !TextUtils.isEmpty(oConfirmPass) && oPassword.equals(oConfirmPass)){
+                progressDialog.show();
                 databaseReference.orderByChild("phone_number").equalTo(oPhoneNumber).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue() !=null) {
+                                progressDialog.dismiss();
                                 Toast.makeText(SignUp.this, "This number already have a account!", Toast.LENGTH_LONG).show();
                             }else {
                                 AddData setRegData = new AddData(oName, oPhoneNumber, oPassword);
@@ -74,6 +80,7 @@ public class SignUp extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
+                                            progressDialog.dismiss();
                                             Intent intent = new Intent(getApplicationContext(), SignIn.class);
                                             startActivity(intent);
                                             Toast.makeText(getApplicationContext(), "Registration Complete!!", Toast.LENGTH_SHORT).show();
