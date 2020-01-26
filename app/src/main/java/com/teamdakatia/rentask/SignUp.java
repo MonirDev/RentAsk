@@ -84,6 +84,7 @@ public class SignUp extends AppCompatActivity {
                                             Intent intent = new Intent(getApplicationContext(), SignIn.class);
                                             startActivity(intent);
                                             Toast.makeText(getApplicationContext(), "Registration Complete!!", Toast.LENGTH_SHORT).show();
+                                            finish();
                                         }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {

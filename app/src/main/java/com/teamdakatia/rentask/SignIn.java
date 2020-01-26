@@ -73,6 +73,7 @@ public class SignIn extends AppCompatActivity {
                                     Intent intent = new Intent(getApplicationContext(), OwnerDashboard.class);
                                     intent.putExtra("UniqueId", oPhoneNumber);
                                     startActivity(intent);
+                                    finish();
                                 } else {
                                     signIn_password.setError("Password or Number Don't Match!!");
                                 }
