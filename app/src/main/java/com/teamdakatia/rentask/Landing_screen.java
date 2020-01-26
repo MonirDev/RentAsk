@@ -24,12 +24,14 @@ public class Landing_screen extends AppCompatActivity {
         Intent intent = new Intent(Landing_screen.this, SignIn.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+        finish();
 
     }
 
     public void search(View view) {
         Intent intent = new Intent(Landing_screen.this, MapActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -50,7 +52,6 @@ public class Landing_screen extends AppCompatActivity {
                 .setMessage("Do you want to exit?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
-
                         finish();
                     }
                 })

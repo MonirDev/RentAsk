@@ -111,6 +111,7 @@ public class OwnerDashboard extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),Landing_screen.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -128,8 +129,11 @@ public class OwnerDashboard extends AppCompatActivity {
 
         AlertDialog alertbox = new AlertDialog.Builder(this)
                 .setMessage("Do you want to Exit?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(getApplicationContext(), Landing_screen.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                         finish();
                     }
                 })
