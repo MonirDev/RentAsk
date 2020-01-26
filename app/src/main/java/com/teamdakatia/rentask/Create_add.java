@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -68,9 +69,11 @@ public class Create_add extends AppCompatActivity {
 
     private String img_url1="",img_url2="",img_url3="", lati, lon;
     private Uri file_path1, file_path2,file_path3;
-    boolean i1 = false,i2 = false,i3 = false,get_location = false;
+    boolean i1 = false,i2 = false,i3 = false,get_location = false, c1 = false,c2 = false,c3 = false;
     private String checkValue = "Facility: ";
     ArrayList<String> checkList = new ArrayList<>();
+
+    ProgressDialog progressDialog;
 
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -113,6 +116,11 @@ public class Create_add extends AppCompatActivity {
         checkGas = findViewById(R.id.checkGas);
         checkFire = findViewById(R.id.checkFire);
         btnPublish = findViewById(R.id.btnPublish);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Uploading Images...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCanceledOnTouchOutside(false);
 
         checkList.add(" ");
         checkList.add(" ");
@@ -180,7 +188,8 @@ public class Create_add extends AppCompatActivity {
                         databaseReferenceall.child(currentDateTime).setValue(setData).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-
+                                if (task.isSuccessful()) {
+                                }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -450,6 +459,57 @@ public class Create_add extends AppCompatActivity {
                                 step1.setVisibility(View.GONE);
                                 step2.setVisibility(View.VISIBLE);
                                 step3.setVisibility(View.GONE);
+                                String currentDateTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+                                String idExit = getIntent().getExtras().getString("uniqueId");
+                                String imageId = idExit+"/";
+                                StorageReference ref1 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"1");
+                                StorageReference ref2 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"2");
+                                StorageReference ref3 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"3");
+                                ref1.putFile(file_path1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Task<Uri> downlaodUri = taskSnapshot.getStorage().getDownloadUrl();
+                                        while (!downlaodUri.isComplete()) ;
+                                        Uri uri = downlaodUri.getResult();
+                                        img_url1 = uri.toString();
+                                        c1 = true;
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                ref2.putFile(file_path2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Task<Uri> downlaodUri = taskSnapshot.getStorage().getDownloadUrl();
+                                        while (!downlaodUri.isComplete()) ;
+                                        Uri uri = downlaodUri.getResult();
+                                        img_url2 = uri.toString();
+                                        c2 = true;
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                ref3.putFile(file_path3).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Task<Uri> downlaodUri = taskSnapshot.getStorage().getDownloadUrl();
+                                        while (!downlaodUri.isComplete()) ;
+                                        Uri uri = downlaodUri.getResult();
+                                        img_url3 = uri.toString();
+                                        c3 = true;
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
                             }else {
                                 floorN.setError("Floor No. can't be Empty");
@@ -472,80 +532,37 @@ public class Create_add extends AppCompatActivity {
     }
 
     public void goNextStep3(View view) {
-        String mDivision = division.getText().toString().trim();
-        String mDistrict = district.getText().toString().trim();
-        String mAreaName = areaName.getText().toString();
-        String mShortAddress = short_address.getText().toString();
-        if (!TextUtils.isEmpty(mDivision)){
-            if (!TextUtils.isEmpty(mDistrict)){
-                if (!TextUtils.isEmpty(mAreaName)){
-                    if (!TextUtils.isEmpty(mShortAddress)){
-                        if (get_location == true){
-                            step1.setVisibility(View.GONE);
-                            step3.setVisibility(View.VISIBLE);
-                            step2.setVisibility(View.GONE);
-                            String currentDateTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-                            String idExit = getIntent().getExtras().getString("uniqueId");
-                            String imageId = idExit+"/";
-                            StorageReference ref1 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"1");
-                            StorageReference ref2 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"2");
-                            StorageReference ref3 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"3");
-                            ref1.putFile(file_path1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Task<Uri> downlaodUri = taskSnapshot.getStorage().getDownloadUrl();
-                                    while (!downlaodUri.isComplete()) ;
-                                    Uri uri = downlaodUri.getResult();
-                                    img_url1 = uri.toString();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            ref2.putFile(file_path2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Task<Uri> downlaodUri = taskSnapshot.getStorage().getDownloadUrl();
-                                    while (!downlaodUri.isComplete()) ;
-                                    Uri uri = downlaodUri.getResult();
-                                    img_url2 = uri.toString();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            ref3.putFile(file_path3).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Task<Uri> downlaodUri = taskSnapshot.getStorage().getDownloadUrl();
-                                    while (!downlaodUri.isComplete()) ;
-                                    Uri uri = downlaodUri.getResult();
-                                    img_url3 = uri.toString();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }else {
-                            pick_location.setError("Pick your home location");
+        if (c1 == true && c2 == true && c3 == true) {
+            String mDivision = division.getText().toString().trim();
+            String mDistrict = district.getText().toString().trim();
+            String mAreaName = areaName.getText().toString();
+            String mShortAddress = short_address.getText().toString();
+            if (!TextUtils.isEmpty(mDivision)) {
+                if (!TextUtils.isEmpty(mDistrict)) {
+                    if (!TextUtils.isEmpty(mAreaName)) {
+                        if (!TextUtils.isEmpty(mShortAddress)) {
+                            if (get_location == true) {
+                                step1.setVisibility(View.GONE);
+                                step3.setVisibility(View.VISIBLE);
+                                step2.setVisibility(View.GONE);
+
+                            } else {
+                                pick_location.setError("Pick your home location");
+                            }
+                        } else {
+                            short_address.setError("Give a short address to your home");
                         }
-                    }else {
-                        short_address.setError("Give a short address to your home");
+                    } else {
+                        areaName.setError("Select Area Name!");
                     }
-                }else {
-                    areaName.setError("Select Area Name!");
+                } else {
+                    district.setError("Select District!");
                 }
-            }else {
-                district.setError("Select District!");
+            } else {
+                division.setError("Select Division!");
             }
         }else {
-            division.setError("Select Division!");
+            Toast.makeText(this, "Uploading Images. Wait for few seceond", Toast.LENGTH_SHORT).show();
         }
     }
     public void goPrevStep1(View view) {
