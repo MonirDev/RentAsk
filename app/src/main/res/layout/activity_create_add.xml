@@ -19,16 +19,80 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/stepText1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="Step 1"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/btnTextColor"
-                android:textSize="24sp" />
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="52dp"
+                    android:gravity="center"
+                    android:background="@drawable/ic_shape"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step 1"
+                        android:textColor="#FFF"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Details"
+                        android:textColor="#FFF"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="52dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="-18dp"
+                    android:background="@drawable/ic_shape4"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step 2"
+                        android:textColor="#534C6E"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Location"
+                        android:textColor="#534C6E"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="52dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="-18dp"
+                    android:background="@drawable/ic_shape4"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step 3"
+                        android:textColor="#534C6E"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Others"
+                        android:textColor="#534C6E"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView4"
@@ -197,16 +261,80 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/stepText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="Step 2"
-                android:textColor="@color/btnTextColor"
-                android:textSize="24sp" />
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="52dp"
+                    android:gravity="center"
+                    android:background="@drawable/ic_shape2"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step 1"
+                        android:textColor="#534C6E"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Details"
+                        android:textColor="#534C6E"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="52dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="-18dp"
+                    android:background="@drawable/ic_shape3"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step 2"
+                        android:textColor="#FFF"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Location"
+                        android:textColor="#FFF"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="52dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="-18dp"
+                    android:background="@drawable/ic_shape4"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step 3"
+                        android:textColor="#534C6E"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Others"
+                        android:textColor="#534C6E"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+            </LinearLayout>
             <RelativeLayout
                 android:id="@+id/rel2"
                 android:layout_width="match_parent"
@@ -324,16 +452,80 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/stepText3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="Step 3"
-                android:textColor="@color/btnTextColor"
-                android:textSize="24sp" />
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="52dp"
+                    android:gravity="center"
+                    android:background="@drawable/ic_shape2"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step 1"
+                        android:textColor="#534C6E"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Details"
+                        android:textColor="#534C6E"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="52dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="-18dp"
+                    android:background="@drawable/ic_shape4"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step 2"
+                        android:textColor="#534C6E"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Location"
+                        android:textColor="#534C6E"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="52dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="-18dp"
+                    android:background="@drawable/ic_shape3"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Step 3"
+                        android:textColor="#FFF"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Others"
+                        android:textColor="#FFF"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/post_phoneNumber"

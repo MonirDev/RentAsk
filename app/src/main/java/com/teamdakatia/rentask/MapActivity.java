@@ -156,7 +156,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             String address = addresses.get(0).getAddressLine(0);
             myCity = addresses.get(0).getSubLocality();
             String name = addresses.get(0).getFeatureName();
-            String name1 = addresses.get(0).getThoroughfare().toString();
+            String name1 = addresses.get(0).getThoroughfare();
             String full = name + " " + name1;
             Log.d("myTag", "full " + full);
             near = myCity;
