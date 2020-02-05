@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,6 +51,7 @@ public class ListAdapter extends BaseAdapter {
         TextView mFloor = view.findViewById(R.id.floorN);
         TextView mAdress = view.findViewById(R.id.fullAddress);
         TextView mrent = view.findViewById(R.id.rent);
+        ImageView mBg = view.findViewById(R.id.bg1);
 
         AddData s = (AddData) this.getItem(i);
 
@@ -59,6 +63,7 @@ public class ListAdapter extends BaseAdapter {
         mFloor.setText(s.getFloorN()+ " Floor");
         mAdress.setText(s.getShort_address());
         mrent.setText(s.getRent_start());
+        Picasso.with(context).load(s.getImgUrl1()).into(mBg);
         return view;
     }
 }

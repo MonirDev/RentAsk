@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
 
@@ -11,8 +11,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:paddingLeft="15dp"
-    android:paddingTop="15dp"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
     android:weightSum="4">
 
     <androidx.cardview.widget.CardView
@@ -20,36 +20,42 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.5"
         app:cardCornerRadius="10dp"
-        app:cardElevation="3dp">
+        app:cardElevation="5dp"
+        android:layout_marginBottom="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="130dp"
             android:orientation="vertical">
 
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="115dp"
-               android:gravity="center"
-               android:background="@drawable/bg">
-
-               <ImageView
-                   android:id="@+id/location"
-                   android:layout_width="50dp"
-                   android:layout_height="50dp"
-                   android:src="@drawable/ic_location_on_black_24dp"
-                   android:layout_centerHorizontal="true"/>
-               <TextView
-                   android:id="@+id/areaName"
-                   android:layout_below="@+id/location"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="Farmgate"
-                   android:gravity="center"
-                   android:textColor="#FFFFFF"
-                   android:textSize="20sp"
-                   android:textStyle="bold"/>
-           </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/bg"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <ImageView
+                    android:id="@+id/bg1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/splash"
+                    android:scaleType="fitXY"/>
+                <ImageView
+                    android:id="@+id/location"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_location_on_black_24dp" />
+                <TextView
+                    android:id="@+id/areaName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/location"
+                    android:gravity="center"
+                    android:text="Farmgate"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="Family"
                     android:layout_marginLeft="5dp"
-                    android:textColor="#000000"
+                    android:textColor="#797575"
                     android:textSize="12sp" />
 
                 <TextView
@@ -84,92 +90,98 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_weight="3"
-        android:padding="10dp"
+        android:layout_height="130dp"
+        android:layout_weight="2.5"
+        android:paddingLeft="15dp"
         android:gravity="center"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <TextView
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Number of Room /Seats : "
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="5dp"
-            android:textColor="#000000"/>
-
+            android:orientation="horizontal">
             <TextView
                 android:id="@+id/nRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:paddingLeft="5dp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bed "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:paddingLeft="5dp"/>
+
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Number of Bath : "
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000000"/>
-
+            android:orientation="horizontal"
+            android:layout_marginLeft="5dp">
             <TextView
                 android:id="@+id/nBath"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bath"
                 android:textSize="16sp"
-                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
                 android:paddingLeft="5dp"/>
+
+
         </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="5dp"
+                android:gravity="right"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="from"
+                    android:textSize="13sp"
+                    android:textColor="#797575"/>
+                <TextView
+                    android:id="@+id/rent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="January"
+                    android:textSize="13sp"
+                    android:textColor="#797575"
+                    android:paddingLeft="5dp"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Floor No. "
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000000"/>
-
-            <TextView
-                android:id="@+id/floorN"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3rd "
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:paddingLeft="5dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Address : "
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000000"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:paddingRight="12dp">
 
             <TextView
                 android:id="@+id/fullAddress"
@@ -177,33 +189,25 @@
                 android:layout_height="wrap_content"
                 android:text="Farmgaate "
                 android:textSize="16sp"
-                android:textColor="#000000"
-                android:paddingLeft="5dp"/>
+                android:textColor="#000000"/>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
             <TextView
+                android:id="@+id/floorN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rent Start From : "
-                android:textSize="16sp"
+                android:text="Floor No. "
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"
-                android:textColor="#000000"/>
+                android:textColor="#797575"/>
 
-            <TextView
-                android:id="@+id/rent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="January"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:paddingLeft="5dp"/>
+
         </LinearLayout>
-
 
     </LinearLayout>
 

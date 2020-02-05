@@ -31,7 +31,6 @@ public class Landing_screen extends AppCompatActivity {
     public void search(View view) {
         Intent intent = new Intent(Landing_screen.this, MapActivity.class);
         startActivity(intent);
-        finish();
     }
 
     @Override

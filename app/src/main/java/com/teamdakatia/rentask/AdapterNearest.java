@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -25,13 +29,15 @@ public class AdapterNearest extends RecyclerView.Adapter<CustomAdapter.CustomVie
     public static class CustomViewHolsder extends RecyclerView.ViewHolder{
 
         public TextView mArea, mPrice, mHome;
-        CardView card;
+        public ImageView mBg;
+        LinearLayout card;
         public CustomViewHolsder(@NonNull View itemView) {
             super(itemView);
             mArea = itemView.findViewById(R.id.area_name);
             mPrice = itemView.findViewById(R.id.mprice);
             mHome = itemView.findViewById(R.id.mhomeType);
-            card = itemView.findViewById(R.id.card);
+            mBg = itemView.findViewById(R.id.bg1);
+            card = itemView.findViewById(R.id.item);
         }
     }
 
@@ -50,6 +56,7 @@ public class AdapterNearest extends RecyclerView.Adapter<CustomAdapter.CustomVie
         holder.mArea.setText(currentItem.getArea_name());
         holder.mHome.setText(currentItem.getHome_type());
         holder.mPrice.setText(currentItem.getPrice() + " TK");
+        Picasso.with(context).load(currentItem.getImgUrl1()).into(holder.mBg);
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

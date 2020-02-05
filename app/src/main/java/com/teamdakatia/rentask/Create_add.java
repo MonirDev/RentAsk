@@ -15,6 +15,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -23,6 +25,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -57,6 +60,8 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 public class Create_add extends AppCompatActivity {
@@ -67,7 +72,7 @@ public class Create_add extends AppCompatActivity {
     private EditText price,short_address,post_phoneNumber;
     private CheckBox checkLift, checkWifi, checkParking, checkCctv, checkGas, checkFire;
 
-    private String img_url1="",img_url2="",img_url3="", lati, lon;
+    private String img_url1="",img_url2="",img_url3="", lati, lon,cArea;
     private Uri file_path1, file_path2,file_path3;
     boolean i1 = false,i2 = false,i3 = false,get_location = false, c1 = false,c2 = false,c3 = false;
     private String checkValue = "Facility: ";
@@ -147,6 +152,8 @@ public class Create_add extends AppCompatActivity {
         dropDown();
         imageSelection();
         checkboxItem();
+
+
         pick_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,7 +164,35 @@ public class Create_add extends AppCompatActivity {
                     OnGPS();
                 }else {
                     //GPS is already On then
-                    getLocation();
+                    final AlertDialog.Builder builder= new AlertDialog.Builder(Create_add.this);
+                    builder.setMessage("Are you in your exact TO-LET location, where your TO-LET home situated??").setCancelable(false).setPositiveButton("YES, get my location", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            getLocation();
+                        }
+                    }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(Create_add.this, "You have to be your TO-LET location to create your TO-LET ", Toast.LENGTH_SHORT).show();
+
+                            dialog.cancel();
+                        }
+                    });
+                    final AlertDialog alertDialog=builder.create();
+                    alertDialog.show();
+
+                }
+            }
+        });
+
+        short_address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (get_location==true) {
+                    LatLng latLng = new LatLng(Double.parseDouble(lati), Double.parseDouble(lon));
+                    getFullAddress(latLng);
+                }else {
+                    pick_location.setError("Pick your Location First!");
                 }
             }
         });
@@ -183,7 +218,7 @@ public class Create_add extends AppCompatActivity {
                     if (!TextUtils.isEmpty(mRentStart)){
                         AddData setData = new AddData(img_url1,img_url2,img_url3,mHome_type,mPrice,
                                 mNumberRoom,mNumberBath,mDivision,mDistrict,mAreaName,mShortAddress,lati,lon,
-                                mPost_phoneNumber,mRentStart,checkValue,postId,mFloorN);
+                                mPost_phoneNumber,mRentStart,checkValue,postId,mFloorN,cArea);
                         String currentDateTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
                         databaseReferenceall.child(currentDateTime).setValue(setData).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -221,6 +256,22 @@ public class Create_add extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getFullAddress(LatLng latLng) {
+        Geocoder geocoder = new Geocoder(Create_add.this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1);
+            String t1 = addresses.get(0).getFeatureName();
+            String t2 = addresses.get(0).getThoroughfare();
+            String t3 = addresses.get(0).getSubLocality();
+            String t4 = addresses.get(0).getLocality();
+            cArea = t3;
+            String fullAddress = t1 + ", " + t2 + ", " + t3 + ", " + t4;
+            short_address.setText(fullAddress);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void dropDown() {
@@ -550,7 +601,7 @@ public class Create_add extends AppCompatActivity {
                                 pick_location.setError("Pick your home location");
                             }
                         } else {
-                            short_address.setError("Give a short address to your home");
+                            short_address.setError("Give a full address to your home");
                         }
                     } else {
                         areaName.setError("Select Area Name!");

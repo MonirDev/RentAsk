@@ -56,9 +56,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/noto_sans_bold"
-            android:gravity="center"
+            android:gravity="left"
             android:text="Nearest Home"
             android:textColor="#7B188D"
+            android:layout_marginLeft="15dp"
             android:textSize="16sp" />
 
             <RelativeLayout
