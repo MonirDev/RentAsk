@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Landing_screen">
+    tools:context=".Landing_screen"
+    android:background="#fff">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -58,7 +59,7 @@
             android:id="@+id/button5"
             android:layout_width="280dp"
             android:layout_height="55dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/noto_sans_bold"
             android:text="Rent a home ?"
             android:textSize="20sp"
