@@ -9,29 +9,33 @@
         android:id="@+id/card"
         android:layout_width="120dp"
         android:layout_height="100dp"
-        android:layout_marginRight="10dp"
         android:layout_marginBottom="15dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="8dp">
 
         <LinearLayout
+            android:id="@+id/item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/bg"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@drawable/bg"
-                android:gravity="center">
-
+                android:layout_height="70dp">
+                <ImageView
+                    android:id="@+id/bg1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/splash"
+                    android:scaleType="fitXY"/>
                 <ImageView
                     android:id="@+id/location"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/ic_location_on_black_24dp" />
-
                 <TextView
                     android:id="@+id/area_name"
                     android:layout_width="match_parent"
@@ -39,7 +43,7 @@
                     android:layout_below="@+id/location"
                     android:gravity="center"
                     android:text="Farmgate"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#fff"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </RelativeLayout>

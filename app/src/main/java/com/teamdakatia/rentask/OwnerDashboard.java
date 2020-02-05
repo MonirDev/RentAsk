@@ -53,7 +53,7 @@ public class OwnerDashboard extends AppCompatActivity {
         postList = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference("Owner");
         postData = FirebaseDatabase.getInstance().getReference("Post");
-        GridLayoutManager gridLayoutManager = new GridLayoutManager( getApplicationContext(),2 );
+        GridLayoutManager gridLayoutManager = new GridLayoutManager( getApplicationContext(),1 );
         mRecyclerView.setLayoutManager( gridLayoutManager );
 
         final String id = getIntent().getExtras().getString("UniqueId");

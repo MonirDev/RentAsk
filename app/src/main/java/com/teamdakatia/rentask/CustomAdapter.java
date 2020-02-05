@@ -2,10 +2,15 @@ package com.teamdakatia.rentask;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -25,15 +30,22 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     }
 
     public static class CustomViewHolsder extends RecyclerView.ViewHolder{
-        public TextView mArea, mPrice, mHome;
-        CardView card;
+        public TextView mArea, mPrice, mHome,mRoom,mBath,mRent,mAddress,mFloor;
+        public ImageView mBg;
+        LinearLayout card;
 
         public CustomViewHolsder(@NonNull View itemView) {
             super(itemView);
             mArea = itemView.findViewById(R.id.area_name);
             mPrice = itemView.findViewById(R.id.mprice);
             mHome = itemView.findViewById(R.id.mhomeType);
-            card = itemView.findViewById(R.id.card);
+            mRoom = itemView.findViewById(R.id.nRoom);
+            mBath = itemView.findViewById(R.id.nBath);
+            mRent = itemView.findViewById(R.id.rent);
+            mAddress = itemView.findViewById(R.id.fullAddress);
+            mFloor = itemView.findViewById(R.id.floorN);
+            mBg = itemView.findViewById(R.id.bg1);
+            card = itemView.findViewById(R.id.item);
         }
     }
 
@@ -51,7 +63,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         holder.mArea.setText(currentItem.getArea_name());
         holder.mHome.setText(currentItem.getHome_type());
+        holder.mRoom.setText(currentItem.getnRooms());
+        holder.mBath.setText(currentItem.getnBath());
+        holder.mRent.setText(currentItem.getRent_start());
+        holder.mAddress.setText(currentItem.getShort_address());
+        holder.mFloor.setText(currentItem.getFloorN() + " Floor");
         holder.mPrice.setText(currentItem.getPrice() + " TK");
+        Picasso.with(context).load(currentItem.getImgUrl1()).into(holder.mBg);
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

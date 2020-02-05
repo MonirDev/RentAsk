@@ -51,7 +51,7 @@ public class AdListview extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        databaseReference.orderByChild("area_name").equalTo(stext).addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("cArea").equalTo(stext).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null){
@@ -64,8 +64,30 @@ public class AdListview extends AppCompatActivity {
                     mListView.setAdapter(adapter);
                     progressDialog.dismiss();
                 }else {
-                    noItem.setVisibility(View.VISIBLE);
-                    progressDialog.dismiss();
+                    databaseReference.orderByChild("area_name").equalTo(stext).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.getValue() != null){
+                                adList.clear();
+                                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                                    AddData value = ds.getValue(AddData.class);
+                                    adList.add(value);
+                                }
+                                ListAdapter adapter = new ListAdapter(getApplicationContext(),adList);
+                                mListView.setAdapter(adapter);
+                                progressDialog.dismiss();
+                            }else {
+                                noItem.setVisibility(View.VISIBLE);
+                                progressDialog.dismiss();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
 
             }

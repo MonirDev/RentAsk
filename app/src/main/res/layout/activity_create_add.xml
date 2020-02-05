@@ -182,7 +182,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
                 android:textSize="18sp"
-               android:layout_below="@id/rel1"/>
+                android:layout_below="@id/rel1"/>
 
         </RelativeLayout>
     </ScrollView>
@@ -214,18 +214,18 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:layout_below="@id/stepText2">
-                    <AutoCompleteTextView
-                        android:id="@+id/division"
-                        android:layout_width="280dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/dropdown_style"
-                        android:drawableRight="@drawable/dropdown"
-                        android:hint="Select Division"
-                        android:paddingLeft="40dp"
-                        android:paddingRight="20dp"
-                        android:textSize="18sp"
-                        android:focusable="false"/>
+                <AutoCompleteTextView
+                    android:id="@+id/division"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/dropdown_style"
+                    android:drawableRight="@drawable/dropdown"
+                    android:hint="Select Division"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="20dp"
+                    android:textSize="18sp"
+                    android:focusable="false"/>
 
                 <AutoCompleteTextView
                     android:id="@+id/district"
@@ -249,18 +249,7 @@
                     android:textSize="18sp" />
             </RelativeLayout>
 
-            <EditText
-                android:id="@+id/shortAddress"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/dropdown_style"
-                android:hint="Full Address: Green Road,Farmgate,Dhaka"
-                android:textSize="14sp"
-                android:inputType="text"
-                android:paddingLeft="10dp"
-                android:layout_below="@id/rel2"/>
+
 
             <Button
                 android:id="@+id/pickLocation"
@@ -272,9 +261,21 @@
                 android:text="Pick Home Location"
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
-                android:layout_below="@id/shortAddress"
+                android:layout_below="@id/rel2"
                 android:drawableRight="@drawable/pick_location"
                 android:paddingRight="20dp"/>
+            <EditText
+                android:id="@+id/shortAddress"
+                android:layout_width="280dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/dropdown_style"
+                android:hint="Click to get your full address"
+                android:textSize="14sp"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:layout_below="@id/pickLocation"/>
 
             <Button
                 android:id="@+id/btnPrev1"
@@ -290,7 +291,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
                 android:textSize="18sp"
-                android:layout_below="@id/pickLocation"/>
+                android:layout_below="@id/shortAddress"/>
 
             <Button
                 android:id="@+id/btnNext2"
@@ -307,7 +308,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/btnTextColor"
                 android:textSize="18sp"
-                android:layout_below="@id/pickLocation"/>
+                android:layout_below="@id/shortAddress"/>
 
 
         </RelativeLayout>

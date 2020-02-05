@@ -32,6 +32,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -52,10 +53,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private AutoCompleteTextView search_bar;
     private String near = "";
     private RecyclerView mREcyclerView;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,databaseReferenceall;
     ProgressDialog progressDialog;
     List<AddData> mList;
     TextView notfound;
+    GoogleMap mGoogleMap;
+    ArrayList<AddData> arrayList = new ArrayList<>();
 
     /*GoogleMap mMap;*/
     final String area_name[] = {"Mirpur","Uttara","Gulshan","Muhammadpur","Dhanmondi","Bashundhara","Baridhara","Elephant Road",
@@ -79,6 +82,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference("allPost");
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -131,27 +135,33 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
 
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        String mCity = getCityName(latLng);
+        String mCity = getCityName(latLng,googleMap);
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("I am here!");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-        googleMap.addMarker(markerOptions);
+//        googleMap.addMarker(markerOptions);
         googleMap.setMyLocationEnabled(true);
         progressDialog.dismiss();
 
 
     }
 
-    private String getCityName(LatLng latLng) {
+
+    private String getCityName(LatLng latLng ,GoogleMap googleMap) {
         String myCity = "";
         Geocoder geocoder = new Geocoder(MapActivity.this, Locale.getDefault());
         try {
             List<Address> addresses =geocoder.getFromLocation(latLng.latitude,latLng.longitude,1);
             String address = addresses.get(0).getAddressLine(0);
-            myCity = addresses.get(0).getLocality();
+            myCity = addresses.get(0).getSubLocality();
+            String name = addresses.get(0).getFeatureName();
+            String name1 = addresses.get(0).getThoroughfare().toString();
+            String full = name + " " + name1;
+            Log.d("myTag", "full " + full);
             near = myCity;
-            databaseReference.orderByChild("district").equalTo(near).addValueEventListener(new ValueEventListener() {
+            final GoogleMap mMap = googleMap;
+            databaseReference.orderByChild("cArea").equalTo(near).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getValue() != null){
@@ -162,6 +172,14 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         }
                         AdapterNearest adapterNearest = new AdapterNearest(getApplicationContext(),mList);
                         mREcyclerView.setAdapter(adapterNearest);
+                        for (int i=0; i<mList.size(); i++) {
+                            LatLng latLng1 = new LatLng(Double.parseDouble(mList.get(i).getPick_lat()),Double.parseDouble(mList.get(i).getPick_long()));
+                            MarkerOptions markerOptions = new MarkerOptions().position(latLng1)
+                                    .title(mList.get(i).getHome_type())
+                                    .snippet(mList.get(i).getShort_address());
+                            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+                            mMap.addMarker(markerOptions);
+                        }
                         progressDialog.dismiss();
 
                     }else {
