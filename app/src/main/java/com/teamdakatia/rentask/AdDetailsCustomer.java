@@ -42,7 +42,6 @@ public class AdDetailsCustomer extends AppCompatActivity {
         rent = findViewById(R.id.rent);
         address = findViewById(R.id.address);
         checkbox_value = findViewById(R.id.checkboxValue);
-        direction = findViewById(R.id.direction);
         contactN = findViewById(R.id.contactN);
 
 

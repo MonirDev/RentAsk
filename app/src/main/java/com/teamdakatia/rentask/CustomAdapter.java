@@ -30,7 +30,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     }
 
     public static class CustomViewHolsder extends RecyclerView.ViewHolder{
-        public TextView mArea, mPrice, mHome,mRoom,mBath,mRent,mAddress,mFloor;
+        public TextView mArea, mPrice, mHome,mRoom,mBath,mRent,mAddress,mFloor,mseat;
         public ImageView mBg;
         LinearLayout card;
 
@@ -45,6 +45,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             mAddress = itemView.findViewById(R.id.fullAddress);
             mFloor = itemView.findViewById(R.id.floorN);
             mBg = itemView.findViewById(R.id.bg1);
+            mseat = itemView.findViewById(R.id.seat);
             card = itemView.findViewById(R.id.item);
         }
     }
@@ -60,7 +61,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolsder holder, final int position) {
         AddData currentItem = postList.get(position);
-
+        if (currentItem.getHome_type().equals("Bachelor")){
+            holder.mseat.setText("Seat");
+        }else if (currentItem.getHome_type().equals("Family")){
+            holder.mseat.setText("Bed");
+        }else {
+            holder.mseat.setText("Bed");
+        }
         holder.mArea.setText(currentItem.getArea_name());
         holder.mHome.setText(currentItem.getHome_type());
         holder.mRoom.setText(currentItem.getnRooms());
