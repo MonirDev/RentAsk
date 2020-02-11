@@ -51,10 +51,17 @@ public class ListAdapter extends BaseAdapter {
         TextView mFloor = view.findViewById(R.id.floorN);
         TextView mAdress = view.findViewById(R.id.fullAddress);
         TextView mrent = view.findViewById(R.id.rent);
+        TextView mseat = view.findViewById(R.id.seat);
         ImageView mBg = view.findViewById(R.id.bg1);
 
         AddData s = (AddData) this.getItem(i);
-
+if (s.getHome_type().equals("Bachelor")){
+    mseat.setText("Seat");
+}else if (s.getHome_type().equals("Family")){
+    mseat.setText("Bed");
+}else {
+    mseat.setText("Bed");
+}
         mArea.setText(s.getArea_name());
         mHome.setText(s.getHome_type());
         mPrice.setText(s.getPrice()+" TK");

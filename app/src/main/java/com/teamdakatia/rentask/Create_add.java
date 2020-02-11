@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -22,6 +23,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -44,7 +46,12 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,7 +61,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -64,7 +74,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-public class Create_add extends AppCompatActivity {
+public class Create_add extends AppCompatActivity{
     private Button btnPublish,pick_location;
     private ScrollView step1, step2,step3;
     private ImageView img1,img2,img3;
@@ -77,6 +87,9 @@ public class Create_add extends AppCompatActivity {
     boolean i1 = false,i2 = false,i3 = false,get_location = false, c1 = false,c2 = false,c3 = false;
     private String checkValue = "Facility: ";
     ArrayList<String> checkList = new ArrayList<>();
+    Location currentLocation;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    private static final int REQUEST_CODE = 101;
 
     ProgressDialog progressDialog;
 
@@ -90,7 +103,7 @@ public class Create_add extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST1 = 71;
     private final int PICK_IMAGE_REQUEST2 = 72;
     private final int PICK_IMAGE_REQUEST3 = 73;
-
+    byte[] imageInByte1,imageInByte2,imageInByte3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,9 +159,15 @@ public class Create_add extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        ActivityCompat.requestPermissions(this,new String[]
+                ActivityCompat.requestPermissions(this,new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            return;
+        }
         dropDown();
         imageSelection();
         checkboxItem();
@@ -157,31 +176,33 @@ public class Create_add extends AppCompatActivity {
         pick_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                locationManager=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                //Check gps is enable or not
-                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    //Write Function To enable gps
-                    OnGPS();
-                }else {
-                    //GPS is already On then
-                    final AlertDialog.Builder builder= new AlertDialog.Builder(Create_add.this);
-                    builder.setMessage("Are you in your exact TO-LET location, where your TO-LET home situated??").setCancelable(false).setPositiveButton("YES, get my location", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                final AlertDialog.Builder builder= new AlertDialog.Builder(Create_add.this);
+                builder.setMessage("Are you in your exact TO-LET location, where your TO-LET home situated??").setCancelable(false).setPositiveButton("YES, get my location", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        locationManager=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                        //Check gps is enable or not
+                        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                            //Write Function To enable gps
+                            OnGPS();
+                        }else {
+                            //GPS is already On then
                             getLocation();
-                        }
-                    }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(Create_add.this, "You have to be your TO-LET location to create your TO-LET ", Toast.LENGTH_SHORT).show();
+                            pick_location.setText("Done!");
 
-                            dialog.cancel();
                         }
-                    });
-                    final AlertDialog alertDialog=builder.create();
-                    alertDialog.show();
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(Create_add.this, "You have to be your TO-LET location to create your TO-LET ", Toast.LENGTH_SHORT).show();
 
-                }
+                        dialog.cancel();
+                    }
+                });
+                final AlertDialog alertDialog=builder.create();
+                alertDialog.show();
+
             }
         });
 
@@ -257,6 +278,9 @@ public class Create_add extends AppCompatActivity {
         });
 
     }
+
+
+
 
     private void getFullAddress(LatLng latLng) {
         Geocoder geocoder = new Geocoder(Create_add.this, Locale.getDefault());
@@ -466,10 +490,26 @@ public class Create_add extends AppCompatActivity {
             i1 = true;
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),file_path1);
-                img1.setImageBitmap(bitmap);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] imageInByte = stream.toByteArray();
+                long lengthbmp = imageInByte.length;
+                if (lengthbmp >= 4000000){
+                    Toast.makeText(this, "Image size must be less than 2 MB or 2 MB", Toast.LENGTH_SHORT).show();
+                }else {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
+                    imageInByte1 = stream.toByteArray();
+                    img1.setImageBitmap(bitmap);
+                }
             }catch (IOException e){
                 e.printStackTrace();
             }
+            /*try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),file_path1);
+                img1.setImageBitmap(bitmap);
+            }catch (IOException e){
+                e.printStackTrace();
+            }*/
         }
         if (requestCode == PICK_IMAGE_REQUEST2 && resultCode == RESULT_OK
                 && data != null && data.getData() != null){
@@ -477,7 +517,17 @@ public class Create_add extends AppCompatActivity {
             file_path2 = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),file_path2);
-                img2.setImageBitmap(bitmap);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] imageInByte = stream.toByteArray();
+                long lengthbmp = imageInByte.length;
+                if (lengthbmp >= 4000000){
+                    Toast.makeText(this, "Image size must be less than 2 MB", Toast.LENGTH_SHORT).show();
+                }else {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
+                    imageInByte2 = stream.toByteArray();
+                    img2.setImageBitmap(bitmap);
+                }
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -488,10 +538,26 @@ public class Create_add extends AppCompatActivity {
             file_path3 = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),file_path3);
-                img3.setImageBitmap(bitmap);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] imageInByte = stream.toByteArray();
+                long lengthbmp = imageInByte.length;
+                if (lengthbmp >= 4000000){
+                    Toast.makeText(this, "Image size must be less than 2 MB", Toast.LENGTH_SHORT).show();
+                }else {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
+                    imageInByte3 = stream.toByteArray();
+                    img3.setImageBitmap(bitmap);
+                }
             }catch (IOException e){
                 e.printStackTrace();
             }
+           /* try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),file_path3);
+                img3.setImageBitmap(bitmap);
+            }catch (IOException e){
+                e.printStackTrace();
+            }*/
         }
     }
 
@@ -513,10 +579,85 @@ public class Create_add extends AppCompatActivity {
                                 String currentDateTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
                                 String idExit = getIntent().getExtras().getString("uniqueId");
                                 String imageId = idExit+"/";
-                                StorageReference ref1 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"1");
-                                StorageReference ref2 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"2");
-                                StorageReference ref3 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"3");
-                                ref1.putFile(file_path1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                final StorageReference ref1 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"1");
+                                final StorageReference ref2 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"2");
+                                final StorageReference ref3 = storageReference.child("images/" + imageId).child(currentDateTime + "/"+"3");
+                                /*UploadTask uploadTask1=ref1.putBytes(imageInByte1);
+
+                                Task<Uri> uriTask1=uploadTask1.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                    @Override
+                                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                        if(task.isSuccessful())
+                                        {
+                                            throw task.getException();
+                                        }
+                                        return ref1.getDownloadUrl();
+                                    }
+                                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task)
+                                    {
+                                        if(task.isSuccessful())
+                                        {
+                                            img_url1=task.getResult().toString();
+                                            c1 = true;
+                                        }
+                                        else {
+                                            Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                                UploadTask uploadTask2=ref2.putBytes(imageInByte2);
+
+                                Task<Uri> uriTask2=uploadTask2.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                    @Override
+                                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                        if(task.isSuccessful())
+                                        {
+                                            throw task.getException();
+                                        }
+                                        return ref2.getDownloadUrl();
+                                    }
+                                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task)
+                                    {
+                                        if(task.isSuccessful())
+                                        {
+                                            img_url2=task.getResult().toString();
+                                            c2 = true;
+                                        }
+                                        else {
+                                            Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                                UploadTask uploadTask3=ref3.putBytes(imageInByte3);
+
+                                Task<Uri> uriTask3=uploadTask3.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                    @Override
+                                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                        if(task.isSuccessful())
+                                        {
+                                            throw task.getException();
+                                        }
+                                        return ref3.getDownloadUrl();
+                                    }
+                                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Uri> task)
+                                    {
+                                        if(task.isSuccessful())
+                                        {
+                                            img_url3=task.getResult().toString();
+                                            c3 = true;
+                                        }
+                                        else {
+                                            Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });*/
+                                ref1.putBytes(imageInByte1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                         Task<Uri> downlaodUri = taskSnapshot.getStorage().getDownloadUrl();
@@ -531,7 +672,7 @@ public class Create_add extends AppCompatActivity {
                                         Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                                ref2.putFile(file_path2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                ref2.putBytes(imageInByte2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                         Task<Uri> downlaodUri = taskSnapshot.getStorage().getDownloadUrl();
@@ -546,7 +687,7 @@ public class Create_add extends AppCompatActivity {
                                         Toast.makeText(Create_add.this, "Failed! Check Internet Conection", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                                ref3.putFile(file_path3).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                ref3.putBytes(imageInByte3).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                         Task<Uri> downlaodUri = taskSnapshot.getStorage().getDownloadUrl();
@@ -642,42 +783,23 @@ public class Create_add extends AppCompatActivity {
         }
         else
         {
-            Location LocationGps= locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            Location LocationNetwork=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            Location LocationPassive=locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+            Task<Location> task = fusedLocationProviderClient.getLastLocation();
+            task.addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        currentLocation = location;
+                        double lat = currentLocation.getLatitude();
+                        double longi = currentLocation.getLongitude();
 
-            if (LocationGps !=null)
-            {
-                double lat=LocationGps.getLatitude();
-                double longi=LocationGps.getLongitude();
 
-                get_location = true;
-                lati=String.valueOf(lat);
-                lon=String.valueOf(longi);
-                pick_location.setText("Done!");
-            }
-            else if (LocationNetwork !=null)
-            {
-                double lat=LocationNetwork.getLatitude();
-                double longi=LocationNetwork.getLongitude();
-                get_location = true;
-                lati=String.valueOf(lat);
-                lon=String.valueOf(longi);
-                pick_location.setText("Done!");
-            }
-            else if (LocationPassive !=null)
-            {
-                double lat=LocationPassive.getLatitude();
-                double longi=LocationPassive.getLongitude();
-                get_location = true;
-                lati=String.valueOf(lat);
-                lon=String.valueOf(longi);
-                pick_location.setText("Done!");
-            }
-            else
-            {
-                Toast.makeText(this, "Can't Get Your Location", Toast.LENGTH_SHORT).show();
-            }
+                        lati=String.valueOf(lat);
+                        lon=String.valueOf(longi);
+                        get_location = true;
+
+                    }
+                }
+            });
         }
 
     }
@@ -698,6 +820,16 @@ public class Create_add extends AppCompatActivity {
         final AlertDialog alertDialog=builder.create();
         alertDialog.show();
     }
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+      switch (requestCode) {
+          case REQUEST_CODE:
+              if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                  getLocation();
+              }
+              break;
+      }
+  }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -707,4 +839,5 @@ public class Create_add extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

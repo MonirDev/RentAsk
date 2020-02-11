@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     List<AddData> mList;
     TextView notfound;
     GoogleMap mGoogleMap;
+    View mapView;
     ArrayList<AddData> arrayList = new ArrayList<>();
 
     /*GoogleMap mMap;*/
@@ -125,6 +127,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                     currentLocation = location;
                     SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                     assert supportMapFragment != null;
+                    mapView=supportMapFragment.getView();
                     supportMapFragment.getMapAsync(MapActivity.this);
                 }
             }
@@ -138,11 +141,23 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         String mCity = getCityName(latLng,googleMap);
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("I am here!");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-//        googleMap.addMarker(markerOptions);
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        googleMap.addMarker(markerOptions);
         googleMap.setMyLocationEnabled(true);
         progressDialog.dismiss();
+        if (mapView != null &&
+                mapView.findViewById(Integer.parseInt("1")) != null) {
+            // Get the button view
+            View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+            // and next place it, on bottom right (as Google Maps app)
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
+                    locationButton.getLayoutParams();
+            // position on right bottom
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+            layoutParams.setMargins(0, 130, 30, 30);
+        }
 
 
     }
@@ -153,7 +168,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         Geocoder geocoder = new Geocoder(MapActivity.this, Locale.getDefault());
         try {
             List<Address> addresses =geocoder.getFromLocation(latLng.latitude,latLng.longitude,1);
-            String address = addresses.get(0).getAddressLine(0);
             myCity = addresses.get(0).getSubLocality();
             String name = addresses.get(0).getFeatureName();
             String name1 = addresses.get(0).getThoroughfare();
